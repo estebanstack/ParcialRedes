@@ -20,7 +20,7 @@ plt.grid(True)
 plt.tight_layout()
 plt.show()
 
-# --- Cálculo de la FFT para el dominio de la frecuencia ---
+# --- Cálculo de la FFT para obtener la transformada de Fourier ---
 X = np.fft.fft(x)
 N = len(x)
 freqs = np.fft.fftfreq(N, 1/fs)
@@ -29,15 +29,15 @@ freqs = np.fft.fftfreq(N, 1/fs)
 mask = freqs >= 0
 freqs_pos = freqs[mask]
 X_pos = X[mask]
-magnitude = np.abs(X_pos) / N  # Normalizamos la magnitud
-phase = np.angle(X_pos)        # Obtenemos la fase
+magnitude = np.abs(X_pos) / N  # Magnitud normalizada
+phase = np.angle(X_pos)        # Fase
 
-# --- Gráfica del espectro de magnitud ---
+# --- Gráfica del espectro de frecuencia (magnitud) ---
 plt.figure(figsize=(10, 4))
 plt.stem(freqs_pos, magnitude, use_line_collection=True)
 plt.xlabel('Frecuencia (Hz)')
 plt.ylabel('Magnitud')
-plt.title('Espectro de frecuencia de x(t)')
+plt.title('Transformada de Fourier (Espectro de frecuencia) de x(t)')
 plt.xlim(0, 300)
 plt.grid(True)
 plt.tight_layout()
