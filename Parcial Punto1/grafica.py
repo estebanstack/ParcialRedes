@@ -24,7 +24,7 @@ X = np.fft.fft(x)
 N = len(x)
 freqs = np.fft.fftfreq(N, d=1/fs)
 
-# Seleccionar únicamente frecuencias positivas (por simetría de señales reales)
+# Seleccionar únicamente frecuencias positivas (por simetría en señales reales)
 positive = freqs >= 0
 freqs_pos = freqs[positive]
 X_pos = X[positive]
@@ -32,7 +32,7 @@ mag = np.abs(X_pos) / N  # Magnitud normalizada
 
 # --- Gráfica 2: Espectro de frecuencia (transformada de Fourier) ---
 fig2 = plt.figure(figsize=(10, 4))
-plt.stem(freqs_pos, mag, linefmt='r-', markerfmt='ro', basefmt=" ", use_line_collection=True)
+plt.stem(freqs_pos, mag, linefmt='r-', markerfmt='ro', basefmt=" ")
 plt.xlabel('Frecuencia (Hz)')
 plt.ylabel('Magnitud')
 plt.title('Espectro de Frecuencia de x(t)')
