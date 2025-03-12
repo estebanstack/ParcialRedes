@@ -24,17 +24,31 @@ plt.show()
 X = np.fft.fft(x)
 N = len(x)
 freqs = np.fft.fftfreq(N, 1/fs)
-mask = freqs >= 0    # Usamos solo el lado positivo
+
+# Usamos solo el lado positivo (por simetría en señales reales)
+mask = freqs >= 0
 freqs_pos = freqs[mask]
 X_pos = X[mask]
-magnitude = np.abs(X_pos) / N  # Normalizamos
+magnitude = np.abs(X_pos) / N  # Normalizamos la magnitud
+phase = np.angle(X_pos)        # Obtenemos la fase
 
-# --- Gráfica en el dominio de la frecuencia ---
+# --- Gráfica del espectro de magnitud ---
 plt.figure(figsize=(10, 4))
 plt.stem(freqs_pos, magnitude, use_line_collection=True)
 plt.xlabel('Frecuencia (Hz)')
 plt.ylabel('Magnitud')
 plt.title('Espectro de frecuencia de x(t)')
+plt.xlim(0, 300)
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+# --- Gráfica del espectro de fase ---
+plt.figure(figsize=(10, 4))
+plt.stem(freqs_pos, phase, use_line_collection=True)
+plt.xlabel('Frecuencia (Hz)')
+plt.ylabel('Fase (rad)')
+plt.title('Espectro de fase de x(t)')
 plt.xlim(0, 300)
 plt.grid(True)
 plt.tight_layout()
